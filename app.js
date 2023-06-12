@@ -2,10 +2,10 @@ const express = require('express');
 const bodyParser = express.json();
 const app = express();
 const {validateBody} = require('./middleware/validateBody');
-const {createBoat} = require('./controllers/Boat.controller');
+const BoatController = require('./controllers/Boat.controller');
 
-app.post('/', bodyParser, validateBody, createBoat); //endpoint
-
+app.post('/', bodyParser, validateBody, BoatController.createBoat); //endpoint
+app.get('/', BoatController.getAllBoats);
 module.exports = app;
 
 
@@ -15,5 +15,10 @@ GET / - findAll
 GET  --- ? --- findOne
 PUT ---- update boat
 DELETE ---- delete boat
+
+*/
+
+/*
+endpoint + controller GET all
 
 */

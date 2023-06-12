@@ -11,3 +11,12 @@ module.exports.createBoat = async (req, res) => {
 
 
 }
+
+module.exports.getAllBoats = async (req, res) => {
+    try {
+        const boats = await Boat.findAll();
+        res.status(200).send(boats);
+    } catch(error) {
+        res.status(400).send('Bad request');
+    }
+}

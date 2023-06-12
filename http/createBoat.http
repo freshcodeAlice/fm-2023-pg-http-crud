@@ -2,9 +2,9 @@ POST http://localhost:3000/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "SuperBoat",
-    "is_sea_able": true,
-    "created_at": "Mon Jun 14 2023 11:04:07 GMT+0300",
-    "water_displacement": 200,
-    "max_speed": 200
+    "name": "SecondBoat",
+    "is_sea_able": false,
+    "created_at": "Mon Jun 07 2023 11:04:07 GMT+0300",
+    "water_displacement": 300,
+    "max_speed": 400
 }
