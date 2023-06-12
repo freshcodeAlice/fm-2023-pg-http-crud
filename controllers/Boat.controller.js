@@ -20,3 +20,18 @@ module.exports.getAllBoats = async (req, res) => {
         res.status(400).send('Bad request');
     }
 }
+
+module.exports.getOne = async (req, res) => {
+    try {
+        //req.params - id here is a STRING!!!!
+        const pk = Number(req.params.id);
+        if (!isNaN(pk)) {
+            const boat = await Boat.findByPk(pk);
+            res.status(200).send(boat);
+        } else {
+            res.status(404).send('Invalid id')
+        }
+    } catch(error) {
+        res.status(400);
+    }
+}

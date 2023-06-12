@@ -6,6 +6,7 @@ const BoatController = require('./controllers/Boat.controller');
 
 app.post('/', bodyParser, validateBody, BoatController.createBoat); //endpoint
 app.get('/', BoatController.getAllBoats);
+app.get('/:id', BoatController.getOne);
 module.exports = app;
 
 
