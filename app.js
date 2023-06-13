@@ -2,14 +2,14 @@ const express = require('express');
 const bodyParser = express.json();
 const app = express();
 const {errorHandler} = require('./errorHandler');
-const {validateBody, validateUser} = require('./middleware/validateBody');
+const {validateBody, validateUser, isOwnerExists} = require('./middleware/validateBody');
 const BoatController = require('./controllers/Boat.controller');
 const UserController = require('./controllers/User.controller');
 
 app.use(bodyParser); // буде використовувати bodyParser на всі роути (за умови наявності Content-Type заголовка)
 
 
-app.post('/boats/',validateBody, BoatController.createOne); //endpoint
+app.post('/boats/', isOwnerExists, validateBody, BoatController.createOne); //endpoint
 app.get('/boats/', BoatController.getAll);
 app.get('/boats/:id', BoatController.getOne);
 app.put('/boats/:id', BoatController.updateOne);
@@ -56,3 +56,10 @@ DELETE /:id --delete user
 
 */
 
+
+
+/*
+якщо при створенні лодки отримуємо помилку неіснуючого юзера, маємо відповісти 403 статусом.
+Створити кастомну помилку на такий випадок і обробити її errorHandler-ом
+
+*/

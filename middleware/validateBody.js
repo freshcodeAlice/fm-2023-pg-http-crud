@@ -1,5 +1,7 @@
 const yup = require('yup');
 const {format} = require('date-fns');
+const {User} = require('../models');
+const UserUnexistError = require('../errors/UserUnexistError');
 
 const CREATE_BOAT_SCHEMA = yup.object({
     name: yup.string().required(),
@@ -40,4 +42,19 @@ module.exports.validateBody = async (req, res, next) => {
 module.exports.validateUser = async (req, res, next) => {
     ///
     next('Your user is so invalid'); // Express see it as a error!
+}
+
+module.exports.isOwnerExists = async (req, res, next) => {
+    try {
+        const {owner_id} = req.body;
+        if(!isNaN(owner_id)) {
+            const [foundedUser] = await User.findByPk(owner_id);
+            if (foundedUser) {
+                return next();
+            }
+        }
+        next(new UserUnexistError('User id is invalid'));
+    } catch(error) {
+        next(error)
+    }
 }

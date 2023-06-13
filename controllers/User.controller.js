@@ -1,5 +1,5 @@
 
-const InvalidUserError = require('../errors/InvalidUserError');
+const UserUnexistError = require('../errors/UserUnexistError');
 const {User} = require('../models/index');
 
 module.exports.createOne = async (req, res, next) => {

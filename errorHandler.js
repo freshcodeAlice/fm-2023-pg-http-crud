@@ -1,7 +1,7 @@
-const InvalidUserError = require('./errors/InvalidUserError');
+const UserUnexistError = require('./errors/UserUnexistError');
 
 module.exports.errorHandler = async (err, req, res, next) => {
-    if(err instanceof InvalidUserError) {
+    if(err instanceof UserUnexistError) {
        return res.status(404).send('User data is not valid');
     }
 

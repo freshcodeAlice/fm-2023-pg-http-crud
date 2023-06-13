@@ -6,5 +6,6 @@ Content-Type: application/json
     "is_sea_able": false,
     "created_at": "Mon Jun 07 2023 11:04:07 GMT+0300",
     "water_displacement": 300,
-    "max_speed": 400
+    "max_speed": 400,
+    "owner_id": 5
 }
