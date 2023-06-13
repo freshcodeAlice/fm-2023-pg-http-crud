@@ -7,15 +7,17 @@ const BoatController = require('./controllers/Boat.controller');
 app.post('/', bodyParser, validateBody, BoatController.createBoat); //endpoint
 app.get('/', BoatController.getAllBoats);
 app.get('/:id', BoatController.getOne);
+app.put('/:id', bodyParser, BoatController.updateOne);
+app.delete('/:id', BoatController.deleteOne);
 module.exports = app;
 
 
 /*
-POST / - create boat
-GET / - findAll
-GET  --- ? --- findOne
-PUT ---- update boat
-DELETE ---- delete boat
++POST / - create boat
++GET / - findAll
++GET  --- ? --- findOne
++PUT ---- update boat
++DELETE ---- delete boat
 
 */
 

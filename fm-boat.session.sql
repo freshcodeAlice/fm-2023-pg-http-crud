@@ -24,4 +24,19 @@ VALUES (
   );
 
 
+{
+  attr1: v1,
+  attr2: v2,
+  attr3: v2
+}
+
+UPDATE boats
+SET attr1 = v1,
+  attr2='v2',
+  attr3=v3
+WHERE
+  id = 1;
+
 */
+
+SELECT * FROM boats;
