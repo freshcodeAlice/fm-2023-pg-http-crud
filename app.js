@@ -1,22 +1,28 @@
 const express = require('express');
 const bodyParser = express.json();
 const app = express();
-const {validateBody} = require('./middleware/validateBody');
+const {errorHandler} = require('./errorHandler');
+const {validateBody, validateUser} = require('./middleware/validateBody');
 const BoatController = require('./controllers/Boat.controller');
 const UserController = require('./controllers/User.controller');
 
+app.use(bodyParser); // буде використовувати bodyParser на всі роути (за умови наявності Content-Type заголовка)
 
-app.post('/boats/', bodyParser, validateBody, BoatController.createOne); //endpoint
+
+app.post('/boats/',validateBody, BoatController.createOne); //endpoint
 app.get('/boats/', BoatController.getAll);
 app.get('/boats/:id', BoatController.getOne);
-app.put('/boats/:id', bodyParser, BoatController.updateOne);
+app.put('/boats/:id', BoatController.updateOne);
 app.delete('/boats/:id', BoatController.deleteOne);
 
-app.post('/users/', UserController.createOne); //endpoint
+app.post('/users/', validateUser, UserController.createOne); //endpoint
 app.get('/users/', UserController.getAll);
 app.get('/users/:id', UserController.getOne);
 app.put('/users/:id', UserController.updateOne);
 app.delete('/users/:id', UserController.deleteOne);
+
+
+app.use(errorHandler);
 
 module.exports = app;
 
@@ -49,3 +55,4 @@ DELETE /:id --delete user
 +6. Прописати endpoint для юзера
 
 */
+

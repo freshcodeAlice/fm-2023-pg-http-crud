@@ -1,26 +1,28 @@
+
+const InvalidUserError = require('../errors/InvalidUserError');
 const {User} = require('../models/index');
 
-module.exports.createOne = async (req, res) => {
+module.exports.createOne = async (req, res, next) => {
     try {
         const createdUser = await User.create(req.body);
         res.status(201).send(createdUser);
     } catch(error) {
-        res.status(400).send('Oops');
+       next(new InvalidUserError('User data is invalid'));
     }
 
 
 }
 
-module.exports.getAll = async (req, res) => {
+module.exports.getAll = async (req, res, next) => {
     try {
         const users = await User.findAll();
         res.status(200).send(users);
     } catch(error) {
-        res.status(400).send('Bad request');
+       next({message: 'User not found'})
     }
 }
 
-module.exports.getOne = async (req, res) => {
+module.exports.getOne = async (req, res, next) => {
     try {
         //req.params - id here is a STRING!!!!
         const pk = Number(req.params.id);
@@ -31,12 +33,12 @@ module.exports.getOne = async (req, res) => {
             res.status(404).send('Invalid id')
         }
     } catch(error) {
-        res.status(400);
+        next(new InvalidUserError('User data is invalid'));
     }
 }
 
 
-module.exports.deleteOne = async (req, res) => {
+module.exports.deleteOne = async (req, res, next) => {
     try {
         const pk = Number(req.params.id);
         if (!isNaN(pk)) {
@@ -51,7 +53,7 @@ module.exports.deleteOne = async (req, res) => {
 }
 
 
-module.exports.updateOne = async (req, res) => {
+module.exports.updateOne = async (req, res, next) => {
     try {
         const pk = Number(req.params.id);
         const updateValues = req.body;

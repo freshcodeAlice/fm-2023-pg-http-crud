@@ -1,12 +1,12 @@
 const {Boat} = require('../models/index');
 
-module.exports.createOne = async (req, res) => {
+module.exports.createOne = async (req, res, next) => {
     //req.body
     try {
         const createdBoat = await Boat.create(req.body);
         res.status(201).send(createdBoat);
     } catch(error) {
-        res.status(400).send('Oops');
+       next('Boat cannot be created');
     }
 
 
