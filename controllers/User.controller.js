@@ -1,10 +1,9 @@
-const {Boat} = require('../models/index');
+const {User} = require('../models/index');
 
 module.exports.createOne = async (req, res) => {
-    //req.body
     try {
-        const createdBoat = await Boat.create(req.body);
-        res.status(201).send(createdBoat);
+        const createdUser = await User.create(req.body);
+        res.status(201).send(createdUser);
     } catch(error) {
         res.status(400).send('Oops');
     }
@@ -14,8 +13,8 @@ module.exports.createOne = async (req, res) => {
 
 module.exports.getAll = async (req, res) => {
     try {
-        const boats = await Boat.findAll();
-        res.status(200).send(boats);
+        const users = await User.findAll();
+        res.status(200).send(users);
     } catch(error) {
         res.status(400).send('Bad request');
     }
@@ -26,8 +25,8 @@ module.exports.getOne = async (req, res) => {
         //req.params - id here is a STRING!!!!
         const pk = Number(req.params.id);
         if (!isNaN(pk)) {
-            const boat = await Boat.findByPk(pk);
-            res.status(200).send(boat);
+            const user = await User.findByPk(pk);
+            res.status(200).send(user);
         } else {
             res.status(404).send('Invalid id')
         }
@@ -41,8 +40,8 @@ module.exports.deleteOne = async (req, res) => {
     try {
         const pk = Number(req.params.id);
         if (!isNaN(pk)) {
-            const boat = await Boat.deleteByPk(pk);
-            res.status(200).send(boat);
+            const deletedUser = await User.deleteByPk(pk);
+            res.status(200).send(deletedUser);
         } else {
             res.status(404).send('Invalid id')
         }
@@ -56,8 +55,8 @@ module.exports.updateOne = async (req, res) => {
     try {
         const pk = Number(req.params.id);
         const updateValues = req.body;
-        const updatedBoat = await Boat.updateByPk({id: pk, updateValues});
-        res.status(200).send(updatedBoat);
+        const updatedUser = await User.updateByPk({id: pk, updateValues});
+        res.status(200).send(updatedUser);
     }catch(error) {
         res.status(400);
     }

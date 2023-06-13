@@ -1,13 +1,11 @@
-class Boat {
+class User {
     static _client = null;
-    static _tableName = 'boats';
+    static _tableName = 'users';
     static _attributes = {
-        name: 'string',
-        is_sea_able: 'boolean',
-        created_at: 'string',
-        water_displacement: 'int',
-        max_speed: 'int',
-        owner_id: 'int'
+      first_name: 'string',
+      last_name: 'string',
+      email: 'string',
+      boat_license: 'int'
     }
 
 
@@ -66,15 +64,4 @@ class Boat {
     }
 }
 
-module.exports = Boat;
-
-    /*
-{
-    name: 'Superboad',
-    isSeaAble: true,
-    createdAt: 2020-10-10,
-    waterDisplacement: 10,
-    maxSpeed: 100
-}
-
-    */
+module.exports = User;
