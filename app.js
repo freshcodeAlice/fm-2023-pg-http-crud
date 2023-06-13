@@ -2,18 +2,15 @@ const express = require('express');
 const bodyParser = express.json();
 const app = express();
 const {errorHandler} = require('./errorHandler');
+
 const {validateBody, validateUser, isOwnerExists} = require('./middleware/validateBody');
 const BoatController = require('./controllers/Boat.controller');
 const UserController = require('./controllers/User.controller');
+const boatRouter = require('./routes/boatRouter');
 
 app.use(bodyParser); // буде використовувати bodyParser на всі роути (за умови наявності Content-Type заголовка)
+app.use('/boats', boatRouter);
 
-
-app.post('/boats/', isOwnerExists, validateBody, BoatController.createOne); //endpoint
-app.get('/boats/', BoatController.getAll);
-app.get('/boats/:id', BoatController.getOne);
-app.put('/boats/:id', BoatController.updateOne);
-app.delete('/boats/:id', BoatController.deleteOne);
 
 app.post('/users/', validateUser, UserController.createOne); //endpoint
 app.get('/users/', UserController.getAll);
