@@ -1,6 +1,8 @@
 class User {
     static _client = null;
     static _tableName = 'users';
+    static name = 'User';
+    
     static _attributes = {
       first_name: 'string',
       last_name: 'string',

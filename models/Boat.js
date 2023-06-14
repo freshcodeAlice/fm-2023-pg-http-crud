@@ -1,6 +1,8 @@
 class Boat {
     static _client = null;
     static _tableName = 'boats';
+    static name = 'Boat';
+    
     static _attributes = {
         name: 'string',
         is_sea_able: 'boolean',
